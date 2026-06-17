@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O.G.A. - Officina Giovani Antifascisti | Grosseto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/oga.png">
+    <style>
+        /* --- RESET & VARIABILI --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --bg-light-dark: #1a1a1a;
+            --primary-red: #c9302c; 
+            --dark-red: #7a1815;
+            --text-light: #ffffff;
+            --text-muted: #cdcdcd;
+            --accent-gray: #222222;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- TOPBAR & SOCIALS --- */
+        .topbar {
+            background-color: #050505;
+            padding: 8px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--accent-gray);
+        }
+
+        .topbar-left span {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .topbar-right .social-icons a {
+            color: var(--text-muted);
+            margin-left: 15px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .topbar-right .social-icons a:hover {
+            color: var(--primary-red);
+        }
+
+        /* --- BREAKING NEWS TICKER --- */
+        .ticker-wrapper {
+            background: var(--dark-red);
+            color: white;
+            padding: 10px 8%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .ticker-title {
+            background: var(--primary-red);
+            padding: 2px 10px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-right: 20px;
+            white-space: nowrap;
+            z-index: 2;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+        }
+
+        .ticker-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+
+        .ticker-wrapper:hover .ticker-text {
+            animation-play-state: paused;
+            cursor: default;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 2px solid var(--primary-red);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            text-decoration: none;
+            /* Flex aggiunto per allineare il logo PNG accanto al testo */
+            display: flex;
+            align-items: center;
+            gap: 10px; 
+        }
+        
+        .logo span { color: var(--primary-red); }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        nav a.active, nav a:hover { color: var(--primary-red); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 70vh;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 1)), 
+                        url('https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/resistenzagiovanile.jpg') top center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-content { max-width: 900px; animation: fadeInUp 1s ease-out; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span { color: var(--primary-red); }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            opacity: 0.8;
+            margin-bottom: 35px;
+        }
+
+        /* --- BOTTONI --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: linear-gradient(45deg, var(--dark-red), var(--primary-red));
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 48, 44, 0.4);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            border: 1px solid var(--primary-red);
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        /* --- SEZIONE COMPONENTI EDITORIALI --- */
+        .news-section {
+            padding: 80px 8%;
+            background-color: var(--bg-light-dark);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--accent-gray);
+            padding-bottom: 15px;
+        }
+
+        .section-title-modern {
+            font-size: 2rem;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+        .section-title-modern span { color: var(--primary-red); }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-post {
+            background: var(--bg-dark);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #222;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .news-post:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-red);
+        }
+
+        .news-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-body { padding: 25px; }
+        .news-date { font-size: 0.8rem; color: var(--primary-red); font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+        .news-h { font-size: 1.25rem; margin-bottom: 12px; text-transform: uppercase; font-weight: 700; }
+        .news-p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+
+        .center-container {
+            text-align: center;
+            width: 100%;
+        }
+
+        /* --- PILASTRI (MANTENUTI IN HOME) --- */
+        .features { padding: 90px 8%; background-color: var(--bg-dark); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid #1c1c1c;
+            padding: 30px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            filter: grayscale(100%) contrast(110%);
+            transition: filter 0.3s ease;
+        }
+
+        .card:hover .card-img { filter: grayscale(0%); }
+        .card:hover { border-color: var(--primary-red); transform: translateY(-5px); }
+        .card h3 { font-size: 1.3rem; text-transform: uppercase; margin-bottom: 12px; }
+        .card p { color: var(--text-muted); line-height: 1.5; font-size: 0.95rem; }
+
+        /* --- BANNER FINALE --- */
+        .banner {
+            background: linear-gradient(115deg, #050505 20%, #4a0d0d 50%, #050505 80%);
+            padding: 90px 8%;
+            text-align: center;
+            border-top: 1px solid rgba(201,48,44,0.2);
+        }
+
+        .banner h2 { font-size: 2.4rem; text-transform: uppercase; margin-bottom: 15px; font-weight: 900; letter-spacing: -0.5px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050505;
+            padding: 50px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--accent-gray);
+        }
+
+        footer p span { color: var(--primary-red); font-weight: bold; }
+        .footer-links { margin-top: 15px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; margin: 0 10px; }
+        .footer-links a:hover { color: var(--text-light); }
+
+        /* --- LOGO --- */
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 2.6rem; }
+            header { padding: 15px 5%; flex-direction: column; gap: 15px; }
+            nav a { margin: 0 8px; font-size: 0.75rem; }
+            .topbar { flex-direction: column; gap: 8px; text-align: center; }
+            .topbar-right .social-icons a { margin: 0 8px; }
+            .logo { flex-direction: row; }
+            .hero-logo { width: 90px; height: 90px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="topbar-left">
+            <span>Grosseto — Officina Giovani Antifascisti</span>
+        </div>
+        <div class="topbar-right">
+            <div class="social-icons">
+                <a href="https://www.instagram.com/officina.giovani.antifascisti/" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@officina.giovani.antifa" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Info Attiva</div>
+        <div class="ticker-text">
+            <span>🔴 <strong>Eventi:</strong> 15 Giu 2026 - Commemorazione della Liberazione di Grosseto</span> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+            <span>🟢 <strong>Iscrizioni:</strong> Sono aperte le tessere O.G.A. per l'anno in corso, visita la sezione dedicata!</span> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/oga.png" alt="Logo OGA" class="logo-img">
+            O.G.A<span>.</span>
+        </a>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="chisiamo.html">Chi Siamo</a>
+            <a href="notizie.html">Notizie ed Eventi</a>
+            <a href="iscrizione.html">Iscriviti all'OGA</a>
+            <a href="contatti.html">Contattaci</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/oga.png" alt="Logo OGA" class="hero-logo">
+        <div class="hero-content">
+            <h1>Officina Giovani<br><span>Antifascisti</span></h1>
+            <p>Oltre l'indifferenza e la paura.</p>
+            <a href="notizie.html" class="btn">Vedi le notizie</a>
+        </div>
+    </section>
+
+    <section class="news-section">
+        <div class="section-header">
+            <div class="section-title-modern">Ultimi <span>Eventi</span></div>
+        </div>
+        <div class="news-grid">
+            
+            <div class="news-post">
+                <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/liberazione.png" alt="Assemblea" class="news-img">
+                <div class="news-body">
+                    <div class="news-date">15 Giu 2026</div>
+                    <h3 class="news-h">Commemorazione della Liberazione di Grosseto</h3>
+                    <p class="news-p">Insieme all'ANPI e al dott. Giuseppe Corlito abbiamo onorato la Liberazione di Grosseto, ricordando i sei partigiani caduti.</p>
+                </div>
+            </div>
+
+            <div class="news-post">
+                <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/campeggionobase.jpg" alt="Libri" class="news-img">
+                <div class="news-body">
+                    <div class="news-date">13 Giu 2026</div>
+                    <h3 class="news-h">Partecipazione al campo No Base</h3>
+                    <p class="news-p">Abbiamo preso parte attiva al campeggio di mobilitazione ideato del Movimento No Base...</p>
+                </div>
+            </div>
+
+            <div class="news-post">
+                <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/pride.jpg" alt="Laboratorio" class="news-img">
+                <div class="news-body">
+                    <div class="news-date">13 Giu 2026</div>
+                    <h3 class="news-h">Pride Toscana Grosseto — Everyone Deserves Sunshine</h3>
+                    <p class="news-p">Grazie a tutti per la partecipazione, ci ha riempito il cuore vedere così tante persone impegnate nella lotta sociale!</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="center-container">
+            <a href="notizie.html" class="btn-secondary">Vedi l'archivio notizie</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="section-header">
+            <div class="section-title-modern">I Nostri <span>4 Pilastri</span></div>
+        </div>
+        <div class="grid">
+            
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/antifascismo.jpg" alt="Antifascismo" class="card-img">
+                <h3>Antifascismo</h3>
+                <p>Come base della Costituzione.</p>
+            </div>
+            
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/democrazia.jpg" alt="Democrazia" class="card-img">
+                <h3>Democrazia</h3>
+                <p>Come fondamenta della società.</p>
+            </div>
+            
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/inclusività.jpg" alt="Inclusività" class="card-img">
+                <h3>Inclusività</h3>
+                <p>Come obiettivo per un mondo migliore.</p>
+            </div>
+
+            <div class="card">
+                <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/militanza.jpg" alt="Militanza" class="card-img">
+                <h3>Militanza</h3>
+                <p>Contro ogni indifferenza.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="banner">
+        <h2>Per dimostrare che a Grosseto<br><span style="color: var(--primary-red);">il vento fischia ancora.</span></h2>
+    </section>
+
+    <footer>
+        <p>© 2026 Officina Giovani Antifascisti (O.G.A.). Creato con passione e <span>Resistenza</span>.</p>
+        <div class="footer-links">
+            <a href="chisiamo.html">Chi Siamo</a> | 
+            <a href="notizie.html">Notizie ed Eventi</a> | 
+            <a href="iscrizione.html">Iscriviti all'OGA</a> |
+            <a href="contatti.html">Contattaci</a>
+        </div>
+    </footer>
+
+</body>
+</html>

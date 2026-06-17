@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Siamo - O.G.A. | Officina Giovani Antifascisti</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/oga.png">
+    <style>
+        /* --- RESET & VARIABILI --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --bg-light-dark: #1a1a1a;
+            --primary-red: #c9302c; 
+            --dark-red: #7a1815;
+            --text-light: #ffffff;
+            --text-muted: #cdcdcd;
+            --accent-gray: #222222;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- TOPBAR & SOCIALS --- */
+        .topbar {
+            background-color: #050505;
+            padding: 8px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--accent-gray);
+        }
+
+        .topbar-left span {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .topbar-right .social-icons a {
+            color: var(--text-muted);
+            margin-left: 15px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .topbar-right .social-icons a:hover {
+            color: var(--primary-red);
+        }
+
+        /* --- BREAKING NEWS TICKER --- */
+        .ticker-wrapper {
+            background: var(--dark-red);
+            color: white;
+            padding: 10px 8%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .ticker-title {
+            background: var(--primary-red);
+            padding: 2px 10px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-right: 20px;
+            white-space: nowrap;
+            z-index: 2;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+        }
+
+        .ticker-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+
+        .ticker-wrapper:hover .ticker-text {
+            animation-play-state: paused;
+            cursor: default;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 2px solid var(--primary-red);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--primary-red); }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        nav a.active, nav a:hover { color: var(--primary-red); }
+
+        /* --- SEZIONE MANIFESTO ED EDITORIALE --- */
+        .about-page {
+            padding: 80px 8%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .intro-hook {
+            max-width: 900px;
+            text-align: center;
+            background: var(--bg-card);
+            border-left: 4px solid var(--primary-red);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .intro-hook p {
+            font-size: 1.35rem;
+            line-height: 1.7;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .content-block {
+            max-width: 800px;
+            width: 100%;
+            background: var(--bg-light-dark);
+            border: 1px solid var(--accent-gray);
+            padding: 50px 40px;
+            border-radius: 6px;
+            transition: border-color 0.3s ease;
+        }
+
+        .content-block:hover {
+            border-color: var(--primary-red);
+        }
+
+        .section-title-modern {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .section-title-modern span { color: var(--primary-red); }
+
+        .subheading {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .main-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        /* --- BANNER FINALE --- */
+        .banner {
+            background: linear-gradient(115deg, #050505 20%, #4a0d0d 50%, #050505 80%);
+            padding: 90px 8%;
+            text-align: center;
+            border-top: 1px solid rgba(201,48,44,0.2);
+        }
+
+        .banner h2 { font-size: 2.4rem; text-transform: uppercase; margin-bottom: 15px; font-weight: 900; letter-spacing: -0.5px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050505;
+            padding: 50px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--accent-gray);
+        }
+
+        footer p span { color: var(--primary-red); font-weight: bold; }
+        .footer-links { margin-top: 15px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; margin: 0 10px; }
+        .footer-links a:hover { color: var(--text-light); }
+
+        /* --- RESPONSIVE --- */
+        @media(max-width: 768px) {
+            header { padding: 15px 5%; flex-direction: column; gap: 15px; }
+            nav a { margin: 0 8px; font-size: 0.75rem; }
+            .topbar { flex-direction: column; gap: 8px; text-align: center; }
+            .topbar-right .social-icons a { margin: 0 8px; }
+            .intro-hook { padding: 25px; }
+            .intro-hook p { font-size: 1.15rem; }
+            .content-block { padding: 30px 20px; }
+            .section-title-modern { font-size: 2rem; }
+            .subheading { font-size: 1.25rem; }
+        }
+
+        /* --- LOGO --- */
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            position: relative;
+            top: 10px; 
+        } 
+    </style>
+</head>
+<body>
+
+    <!-- 1. TOPBAR CON SOCIAL -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <span>Grosseto — Officina Giovani Antifascisti</span>
+        </div>
+        <div class="topbar-right">
+            <div class="social-icons">
+                <a href="https://www.instagram.com/officina.giovani.antifascisti/" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@officina.giovani.antifa" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. TICKER NEWS -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Info Attiva</div>
+        <div class="ticker-text">
+            <span>🔴 <strong>Eventi:</strong> 15 Giu 2026 - Commemorazione della Liberazione di Grosseto</span> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+            <span>🟢 <strong>Iscrizioni:</strong> Sono aperte le tessere O.G.A. per l'anno in corso, visita la sezione dedicata!</span> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- 3. HEADER & MENU (Classe Active su Chi Siamo) -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/oga.png" alt="Logo OGA" class="logo-img">
+            O.G.A<span>.</span>
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chisiamo.html" class="active">Chi Siamo</a>
+            <a href="notizie.html">Notizie ed Eventi</a>
+            <a href="iscrizione.html">Iscriviti all'OGA</a>
+            <a href="contatti.html">Contattaci</a>
+        </nav>
+    </header>
+
+    <!-- 4. MAIN CONTENT AREA -->
+    <main class="about-page">
+        
+        <!-- Blocco Introduzione Forte -->
+        <div class="intro-hook">
+            <p>Viviamo in un periodo in cui l'intolleranza cerca di farsi spazio tra i banchi e il disinteresse spegne il dibattito. La scuola e l'università devono essere luoghi di libertà, non di silenzio. Non possiamo restare a guardare mentre i valori della democrazia vengono messi in discussione.</p>
+        </div>
+
+        <!-- Blocco Identità Collettivo -->
+        <div class="content-block">
+            <h1 class="section-title-modern">Chi <span>Siamo</span></h1>
+            <div class="subheading">Studenti, non spettatori.</div>
+            <p class="main-text">
+                L'Officina Giovani Antifascisti è un collettivo che affonda le radici nell'antifascismo militante e culturale. Crediamo nella partecipazione attiva, nel supporto reciproco e nella difesa dei diritti di ogni studente. Per noi l'antifascismo è una pratica quotidiana, non una ricorrenza sul calendario.
+            </p>
+        </div>
+
+    </main>
+
+    <!-- 5. BANNER ATTITUDE -->
+    <section class="banner">
+        <h2>Per dimostrare che a Grosseto<br><span style="color: var(--primary-red);">il vento fischia ancora.</span></h2>
+    </section>
+
+    <!-- 6. FOOTER -->
+    <footer>
+        <p>© 2026 Officina Giovani Antifascisti (O.G.A.). Creato con passione e <span>Resistenza</span>.</p>
+        <div class="footer-links">
+            <a href="chisiamo.html">Chi Siamo</a> | 
+            <a href="notizie.html">Notizie ed Eventi</a> | 
+            <a href="iscrizione.html">Iscriviti all'OGA</a> |
+            <a href="contatti.html">Contattaci</a>
+        </div>
+    </footer>
+
+</body>
+</html>

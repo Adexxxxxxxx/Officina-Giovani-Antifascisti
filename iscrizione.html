@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iscriviti all'OGA - O.G.A. | Officina Giovani Antifascisti</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/oga.png">
+    <style>
+        /* --- RESET & VARIABILI --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --bg-light-dark: #1a1a1a;
+            --primary-red: #c9302c; 
+            --dark-red: #7a1815;
+            --text-light: #ffffff;
+            --text-muted: #cdcdcd;
+            --accent-gray: #222222;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- TOPBAR & SOCIALS --- */
+        .topbar {
+            background-color: #050505;
+            padding: 8px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--accent-gray);
+        }
+
+        .topbar-left span {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .topbar-right .social-icons a {
+            color: var(--text-muted);
+            margin-left: 15px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .topbar-right .social-icons a:hover {
+            color: var(--primary-red);
+        }
+
+        /* --- BREAKING NEWS TICKER --- */
+        .ticker-wrapper {
+            background: var(--dark-red);
+            color: white;
+            padding: 10px 8%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .ticker-title {
+            background: var(--primary-red);
+            padding: 2px 10px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-right: 20px;
+            white-space: nowrap;
+            z-index: 2;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+        }
+
+        .ticker-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+
+        .ticker-wrapper:hover .ticker-text {
+            animation-play-state: paused;
+            cursor: default;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 2px solid var(--primary-red);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--primary-red); }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        nav a.active, nav a:hover { color: var(--primary-red); }
+
+        /* --- SEZIONE ISCRIZIONI / FORM --- */
+        .join-section {
+            padding: 60px 8%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .join-intro {
+            max-width: 700px;
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .join-intro h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        .join-intro h1 span { color: var(--primary-red); }
+
+        .join-intro p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* STRUTTURA DEL FORM */
+        .form-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-gray);
+            border-top: 4px solid var(--primary-red);
+            padding: 40px;
+            border-radius: 6px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="date"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--bg-light-dark);
+            border: 1px solid #252525;
+            color: var(--text-light);
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            background: #202020;
+            box-shadow: 0 0 8px rgba(201, 48, 44, 0.2);
+        }
+
+        /* CHECKBOX PRIVACY */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 4px;
+            accent-color: var(--primary-red);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        /* BOTTONE INVIO */
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--dark-red), var(--primary-red));
+            color: white;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 48, 44, 0.4);
+        }
+
+        /* --- BANNER FINALE --- */
+        .banner {
+            background: linear-gradient(115deg, #050505 20%, #4a0d0d 50%, #050505 80%);
+            padding: 90px 8%;
+            text-align: center;
+            border-top: 1px solid rgba(201,48,44,0.2);
+        }
+
+        .banner h2 { font-size: 2.4rem; text-transform: uppercase; margin-bottom: 15px; font-weight: 900; letter-spacing: -0.5px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050505;
+            padding: 50px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--accent-gray);
+        }
+
+        footer p span { color: var(--primary-red); font-weight: bold; }
+        .footer-links { margin-top: 15px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; margin: 0 10px; }
+        .footer-links a:hover { color: var(--text-light); }
+
+        /* --- RESPONSIVE --- */
+        @media(max-width: 768px) {
+            header { padding: 15px 5%; flex-direction: column; gap: 15px; }
+            nav a { margin: 0 8px; font-size: 0.75rem; }
+            .topbar { flex-direction: column; gap: 8px; text-align: center; }
+            .topbar-right .social-icons a { margin: 0 8px; }
+            .join-intro h1 { font-size: 2rem; }
+            .form-wrapper { padding: 25px 20px; }
+        }
+
+        /* --- LOGO --- */
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            position: relative;
+            top: 10px; 
+        } 
+    </style>
+</head>
+<body>
+
+    <!-- 1. TOPBAR CON SOCIAL -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <span>Grosseto — Officina Giovani Antifascisti</span>
+        </div>
+        <div class="topbar-right">
+            <div class="social-icons">
+                <a href="https://www.instagram.com/officina.giovani.antifascisti/" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@officina.giovani.antifa" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. TICKER NEWS -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Info Attiva</div>
+        <div class="ticker-text">
+            <span>🔴 <strong>Eventi:</strong> 15 Giu 2026 - Commemorazione della Liberazione di Grosseto</span> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+            <span>🟢 <strong>Iscrizioni:</strong> Sono aperte le tessere O.G.A. per l'anno in corso, visita la sezione dedicata!</span> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- 3. HEADER & MENU (Classe Active su Iscriviti all'OGA) -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/oga.png" alt="Logo OGA" class="logo-img">
+            O.G.A<span>.</span>
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chisiamo.html">Chi Siamo</a>
+            <a href="notizie.html">Notizie ed Eventi</a>
+            <a href="iscrizione.html" class="active">Iscriviti all'OGA</a>
+            <a href="contatti.html">Contattaci</a>
+        </nav>
+    </header>
+
+    <!-- 4. AREA FORM DI TESSERAMENTO -->
+    <main class="join-section">
+        <div class="join-intro">
+            <h1>Prendi <span>Parte Attiva</span></h1>
+            <p>Non essere un semplice spettatore. Unisciti all'Officina Giovani Antifascisti per costruire insieme laboratori e mobilitazioni studentesche sul territorio di Grosseto. Compila il modulo per richiedere l'iscrizione.</p>
+        </div>
+
+        <div class="form-wrapper">
+            <form id="iscrizioneForm" action="https://formspree.io/f/mrevveye" method="POST">                
+                <div class="form-group">
+                    <label for="nome">Nome e Cognome</label>
+                    <input type="text" id="nome" name="nome" placeholder="Inserisci il tuo nome completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Indirizzo Email</label>
+                    <input type="email" id="email" name="email" placeholder="esempio@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nascita">Data di Nascita</label>
+                    <input type="date" id="nascita" name="nascita" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="istituto">Scuola / Università / Lavoro</label>
+                    <input type="text" id="istituto" name="istituto" placeholder="Es. Liceo Scientifico G. Marconi, Polo Universitario Grossetano..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="motivo">Perché vuoi unirti all'O.G.A.? (Facoltativo)</label>
+                    <textarea id="motivo" name="motivo" rows="4" placeholder="Raccontaci brevemente cosa ti spinge a partecipare o quali temi ti interessano di più..."></textarea>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="privacy" name="privacy" required>
+                    <label for="privacy">Accetto il trattamento dei dati personali necessari esclusivamente per la gestione delle attività interne e dei contatti del collettivo O.G.A.</label>
+                </div>
+
+                <button type="submit" class="submit-btn">Invia richiesta di tesseramento</button>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- 5. BANNER ATTITUDE -->
+    <section class="banner">
+        <h2>Per dimostrare che a Grosseto<br><span style="color: var(--primary-red);">il vento fischia ancora.</span></h2>
+    </section>
+
+    <!-- 6. FOOTER -->
+    <footer>
+        <p>© 2026 Officina Giovani Antifascisti (O.G.A.). Creato con passione e <span>Resistenza</span>.</p>
+        <div class="footer-links">
+            <a href="chisiamo.html">Chi Siamo</a> | 
+            <a href="notizie.html">Notizie ed Eventi</a> | 
+            <a href="iscrizione.html">Iscriviti all'OGA</a> |
+            <a href="contatti.html">Contattaci</a>
+        </div>
+    </footer>
+
+</body>
+<script>
+        const form = document.getElementById('iscrizioneForm');
+        
+        form.addEventListener('submit', async function(event) {
+            // 1. Blocca il reindirizzamento automatico alla pagina di Formspree
+            event.preventDefault();
+            
+            // 2. Raccoglie i dati inseriti nel form
+            const formData = new FormData(form);
+            
+            // 3. Invia i dati in background a Formspree
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            // 4. Se l'invio è andato a buon fine, mostra la notifica e svuota il form
+            if (response.ok) {
+                alert('Richiesta inviata con successo! Verrai ricontattato presto dal collettivo. Stay Rebel!');
+                form.reset(); // Svuota i campi del modulo
+            } else {
+                // Se c'è un errore (es. problemi di connessione)
+                alert('Ops! C\'è stato un problema con l\'invio della richiesta. Riprova più tardi o scrivici sui social.');
+            }
+        });
+    </script>
+</html>

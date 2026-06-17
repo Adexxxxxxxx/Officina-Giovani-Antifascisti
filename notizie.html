@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notizie ed Eventi - O.G.A. | Officina Giovani Antifascisti</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/oga.png">
+    <style>
+        /* --- RESET & VARIABILI --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --bg-light-dark: #1a1a1a;
+            --primary-red: #c9302c; 
+            --dark-red: #7a1815;
+            --text-light: #ffffff;
+            --text-muted: #cdcdcd;
+            --accent-gray: #222222;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- TOPBAR & SOCIALS --- */
+        .topbar {
+            background-color: #050505;
+            padding: 8px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--accent-gray);
+        }
+
+        .topbar-left span {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .topbar-right .social-icons a {
+            color: var(--text-muted);
+            margin-left: 15px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .topbar-right .social-icons a:hover {
+            color: var(--primary-red);
+        }
+
+        /* --- BREAKING NEWS TICKER --- */
+        .ticker-wrapper {
+            background: var(--dark-red);
+            color: white;
+            padding: 10px 8%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .ticker-title {
+            background: var(--primary-red);
+            padding: 2px 10px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-right: 20px;
+            white-space: nowrap;
+            z-index: 2;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+        }
+
+        .ticker-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+
+        .ticker-wrapper:hover .ticker-text {
+            animation-play-state: paused;
+            cursor: default;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 2px solid var(--primary-red);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--primary-red); }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        nav a.active, nav a:hover { color: var(--primary-red); }
+
+        /* --- SEZIONE ARCHIVIO EVENTI --- */
+        .archive-section {
+            padding: 60px 8%;
+        }
+
+        .archive-intro {
+            max-width: 800px;
+            margin-bottom: 50px;
+        }
+
+        .archive-intro h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        .archive-intro h1 span { color: var(--primary-red); }
+
+        .archive-intro p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* GRIGLIA EDITORIALE */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-gray);
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-red);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .event-img-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .event-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .event-card:hover .event-img {
+            transform: scale(1.05);
+        }
+
+        .event-tag {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: var(--primary-red);
+            color: white;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+        }
+
+        .event-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .event-date {
+            font-size: 0.85rem;
+            color: var(--primary-red);
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .event-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .event-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .event-mentions {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            border-top: 1px solid #222;
+            padding-top: 12px;
+            font-style: italic;
+        }
+
+        .event-mentions strong {
+            color: var(--text-light);
+        }
+
+        /* --- BANNER FINALE --- */
+        .banner {
+            background: linear-gradient(115deg, #050505 20%, #4a0d0d 50%, #050505 80%);
+            padding: 90px 8%;
+            text-align: center;
+            border-top: 1px solid rgba(201,48,44,0.2);
+        }
+
+        .banner h2 { font-size: 2.4rem; text-transform: uppercase; margin-bottom: 15px; font-weight: 900; letter-spacing: -0.5px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050505;
+            padding: 50px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--accent-gray);
+        }
+
+        footer p span { color: var(--primary-red); font-weight: bold; }
+        .footer-links { margin-top: 15px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; margin: 0 10px; }
+        .footer-links a:hover { color: var(--text-light); }
+
+        /* --- RESPONSIVE --- */
+        @media(max-width: 768px) {
+            header { padding: 15px 5%; flex-direction: column; gap: 15px; }
+            nav a { margin: 0 8px; font-size: 0.75rem; }
+            .topbar { flex-direction: column; gap: 8px; text-align: center; }
+            .topbar-right .social-icons a { margin: 0 8px; }
+            .archive-intro h1 { font-size: 2rem; }
+            .events-grid { grid-template-columns: 1fr; }
+        }
+
+        /* --- LOGO --- */
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            position: relative;
+            top: 10px; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 1. TOPBAR CON SOCIAL -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <span>Grosseto — Officina Giovani Antifascisti</span>
+        </div>
+        <div class="topbar-right">
+            <div class="social-icons">
+                <a href="https://www.instagram.com/officina.giovani.antifascisti/" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@officina.giovani.antifa" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. TICKER NEWS -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Info Attiva</div>
+        <div class="ticker-text">
+            <span>🔴 <strong>Eventi:</strong> 15 Giu 2026 - Commemorazione della Liberazione di Grosseto</span> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+            <span>🟢 <strong>Iscrizioni:</strong> Sono aperte le tessere O.G.A. per l'anno in corso, visita la sezione dedicata!</span> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- 3. HEADER & MENU (Classe Active su Notizie ed Eventi) -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/oga.png" alt="Logo OGA" class="logo-img">
+            O.G.A<span>.</span>
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="chisiamo.html">Chi Siamo</a>
+            <a href="notizie.html" class="active">Notizie ed Eventi</a>
+            <a href="iscrizione.html">Iscriviti all'OGA</a>
+            <a href="contatti.html">Contattaci</a>
+        </nav>
+    </header>
+
+    <!-- 4. SEZIONE ARCHIVIO CONTENUTI -->
+    <main class="archive-section">
+        <div class="archive-intro">
+            <h1>Notizie ed <span>Eventi</span></h1>
+            <p>L'archivio politico, sociale e culturale dei nostri interventi sul territorio. Tracce visibili della nostra presenza attiva a Grosseto.</p>
+        </div>
+
+        <div class="events-grid">
+
+             <!-- LIBERAZIONE DI GROSSETO -->
+            <div class="event-card">
+                <div class="event-img-container">
+                    <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/liberazione.png" alt="Liberazione di Grosseto" class="event-img">
+                    <span class="event-tag">Memoria Attiva</span>
+                </div>
+                <div class="event-content">
+                    <div class="event-date"><i class="far fa-calendar-alt"></i> 15 Giugno 2026</div>
+                    <h2 class="event-title">Commemorazione della Liberazione di Grosseto</h2>
+                    <p class="event-text">Insieme all'ANPI e al dott. Giuseppe Corlito abbiamo onorato la Liberazione di Grosseto, ricordando i sei partigiani caduti. È stato un onore poter intervenire e ribadire, con la nostra presenza, l'impegno costante dell'O.G.A. nel difendere i valori della Resistenza sul nostro territorio.</p>
+                </div>
+            </div>
+
+            <!-- PARTECIPAZIONE CAMPO NO BASE -->
+            <div class="event-card">
+                <div class="event-img-container">
+                    <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/campeggionobase.jpg" alt="Campeggio NO Base" class="event-img">
+                    <span class="event-tag">Antimilitarismo</span>
+                </div>
+                <div class="event-content">
+                    <div class="event-date"><i class="far fa-calendar-alt"></i> 13 Giugno 2026</div>
+                    <h2 class="event-title">Partecipazione al campo No Base</h2>
+                    <p class="event-text">Abbiamo preso parte attiva al campeggio di mobilitazione ideato dal Movimento No Base contro i progetti di militarizzazione del territorio toscano, portando il punto di vista e il rifiuto dei giovani e degli studenti alla logica della guerra e dell'occupazione di spazi pubblici.</p>
+                    <div class="event-mentions">In collaborazione con <strong>Movimento No Base</strong></div>
+                </div>
+            </div>
+
+            <!-- PRIDE TOSCANA GROSSETO -->
+            <div class="event-card">
+                <div class="event-img-container">
+                    <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/pride.jpg" alt="Toscana Pride" class="event-img">
+                    <span class="event-tag">Diritti</span>
+                </div>
+                <div class="event-content">
+                    <div class="event-date"><i class="far fa-calendar-alt"></i> 13 Giugno 2026</div>
+                    <h2 class="event-title">Pride Toscana Grosseto — Everyone Deserves Sunshine</h2>
+                    <p class="event-text">Grazie a tutti per la partecipazione, ci ha riempito il cuore vedere così tante persone impegnate nella lotta sociale! Una risposta collettiva forte e orgogliosa contro ogni forma di discriminazione.</p>
+                </div>
+            </div>
+
+            <!-- REAGIAMO & NO BASE PISA -->
+            <div class="event-card">
+                <div class="event-img-container">
+                    <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/bollettinohub.jpg" alt="Bollettino Hub" class="event-img">
+                    <span class="event-tag">Pace</span>
+                </div>
+                <div class="event-content">
+                    <div class="event-date"><i class="far fa-calendar-alt"></i> 23 Maggio 2026</div>
+                    <h2 class="event-title">Iniziative per la Pace e Antimilitarismo</h2>
+                    <p class="event-text">Nel pomeriggio discussione critica e presentazione del Bollettino Hub con il Movimento No Base di Pisa per analizzare la militarizzazione dei territori e produrre consapevolezza collettiva. In serata, spazio alla socialità con "REAGIAMO! Il Karaoke Manifestante": usare la voce per costruire comunità dissenziente e pacifica.</p>
+                    <div class="event-mentions">In collaborazione con <strong>Movimento No Base</strong> e <strong>Coordinamento Pace Grosseto</strong></div>
+                </div>
+            </div>
+
+            <!-- FESTA DELLA LIBERAZIONE -->
+            <div class="event-card">
+                <div class="event-img-container">
+                    <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/25aprile.jpg" alt="Festa della Liberazione" class="event-img">
+                    <span class="event-tag">Antifascismo</span>
+                </div>
+                <div class="event-content">
+                    <div class="event-date"><i class="far fa-calendar-alt"></i> 25 Aprile 2026</div>
+                    <h2 class="event-title">Festa della Liberazione</h2>
+                    <p class="event-text">Vogliamo smuoverle un po’ queste acque grossetane? Vi aspettiamo in molti per riprendere il significato storico e militante di questa data fondamentale. Per l'occasione ha preso la parola la nostra grandissima attivista sul palco.</p>
+                    <div class="event-mentions">Intervento a cura di <strong>Giorgia Masuero</strong></div>
+                </div>
+            </div>
+
+            <!-- FESTIVAL DELLA RESISTENZA -->
+            <div class="event-card">
+                <div class="event-img-container">
+                    <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/festivalresistente.jpg" alt="Festivalresistente" class="event-img">
+                    <span class="event-tag">Memoria Attiva</span>
+                </div>
+                <div class="event-content">
+                    <div class="event-date"><i class="far fa-calendar-alt"></i> 23 - 24 - 25 Aprile 2026</div>
+                    <h2 class="event-title">Festival della Resistenza</h2>
+                    <p class="event-text">Tre giornate dense di eventi, dibattiti politici, laboratori, condivisione e riflessioni collettive. Un momento essenziale per rimettere al centro della nostra pratica quotidiana i valori costituzionali e storici nati dalla lotta partigiana.</p>
+                </div>
+            </div>
+
+            <!-- GROSSETO CONTRO LE GUERRE -->
+            <div class="event-card">
+                <div class="event-img-container">
+                    <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/grossetocontrotutteleguerre.jpg" alt="Corteo pace" class="event-img">
+                    <span class="event-tag">Pace</span>
+                </div>
+                <div class="event-content">
+                    <div class="event-date"><i class="far fa-calendar-alt"></i> 28 Marzo 2026</div>
+                    <h2 class="event-title">Grosseto contro tutte le guerre</h2>
+                    <p class="event-text">In corteo per non restare indifferenti. Esserci significa dare voce a chi non l’ha, significa credere che un’alternativa alla violenza sistemica sia possibile. Grosseto ha risposto con determinazione alla chiamata della pace e della solidarietà internazionale.</p>
+                </div>
+            </div>
+
+            <!-- OPEN MIC KHORAKHANE -->
+            <div class="event-card">
+                <div class="event-img-container">
+                    <img src="https://raw.githubusercontent.com/Adexxxxxxxx/Officina-Giovani-Antifascisti/main/8marzo.jpg" alt="Open Mic" class="event-img">
+                    <span class="event-tag">Genere</span>
+                </div>
+                <div class="event-content">
+                    <div class="event-date"><i class="far fa-calendar-alt"></i> 8 Marzo 2026</div>
+                    <h2 class="event-title">Open Mic al Khorakhanè</h2>
+                    <p class="event-text">In occasione della Giornata Internazionale della Donna abbiamo liberato la parola e l'espressione artistica sul palco attraverso la formula del microfono aperto, per affrontare e combattere culturalmente le disuguaglianze e il patriarcato.</p>
+                    <div class="event-mentions">Organizzato insieme al collettivo <strong>Women Talking</strong></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 5. BANNER ATTITUDE -->
+    <section class="banner">
+        <h2>Per dimostrare che a Grosseto<br><span style="color: var(--primary-red);">il vento fischia ancora.</span></h2>
+    </section>
+
+    <!-- 6. FOOTER -->
+    <footer>
+        <p>© 2026 Officina Giovani Antifascisti (O.G.A.). Creato con passione e <span>Resistenza</span>.</p>
+        <div class="footer-links">
+            <a href="chisiamo.html">Chi Siamo</a> | 
+            <a href="notizie.html">Notizie ed Eventi</a> | 
+            <a href="iscrizione.html">Iscriviti all'OGA</a> |
+            <a href="contatti.html">Contattaci</a>
+        </div>
+    </footer>
+
+</body>
+</html>
